@@ -2,8 +2,8 @@
 
 *Learn about the person you're helping. Update this as you go.*
 
-- **Name:** 
-- **What to call them:** 
+- **Name:** Ansh
+- **What to call them:** Ansh
 - **Pronouns:** *(optional)*
 - **Timezone:** 
 - **Notes:** 

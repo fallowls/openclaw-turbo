@@ -1,0 +1,5 @@
+lead_id,first_name,last_name,title,email_primary,linkedin_person_url,company_name,company_domain,industry,revenue,employee_count,company_country
+558b79f9-1d68-44ea-8364-784db1197f40,Daniel,Chan,IT Manager,daniel.chan@nccgroup.com,https://www.linkedin.com/in/danielpchan,NCC Group,nccgroup.com,information technology & services,321219000,2200,United Kingdom
+917ba5f7-3b40-4b5a-a6b3-9dcff163e498,Mike,Jones,IT Manager,,https://www.linkedin.com/in/mike-jones-720a05101,KCOM,kcom.com,information technology & services,129000000,1100,United Kingdom
+6016b5b6-e0cb-46e5-a350-adb44b4a2f3a,Toby,Hewett,IT Manager,,https://www.linkedin.com/in/tobyhewett,Pulsant,pulsant.com,information technology & services,126000000,310,United Kingdom
+59477749-b36a-4f64-8db0-8539b37a95a4,John,Ananga,IT Manager,johnananga@kubrickgroup.com,https://www.linkedin.com/in/johnkananga,Kubrick Group,kubrickgroup.com,information technology & services,118000000,950,United Kingdom

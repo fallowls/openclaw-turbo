@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <title>Scripter</title>
+    <style>
+      body {
+        font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+        padding: 14px;
+        width: 280px;
+        background: #0f172a;
+        color: #e5e7eb;
+      }
+      label { font-size: 12px; opacity: 0.8; }
+      input {
+        width: 100%;
+        padding: 8px 10px;
+        margin: 6px 0 12px;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: #111827;
+        color: #e5e7eb;
+      }
+      button {
+        width: 100%;
+        padding: 9px;
+        margin: 6px 0;
+        border-radius: 10px;
+        border: 1px solid rgba(255,255,255,0.08);
+        background: #1f2937;
+        color: #fff;
+        cursor: pointer;
+      }
+      button.primary { background: #2563eb; }
+      .row { margin-bottom: 8px; }
+      .status { font-size: 11px; opacity: 0.7; margin-top: 8px; }
+    </style>
+  </head>
+  <body>
+    <div class="row">
+      <label>Backend WS URL</label>
+      <input id="wsUrl" placeholder="wss://..." />
+    </div>
+    <button id="start" class="primary">Start Capture</button>
+    <button id="stop">Stop Capture</button>
+    <div class="status" id="status">Idle</div>
+    <script type="module" src="popup.js"></script>
+  </body>
+</html>

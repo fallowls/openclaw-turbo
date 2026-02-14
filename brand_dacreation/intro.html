@@ -1,0 +1,391 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Da Creation — Company Introduction</title>
+  <style>
+    /* Embed fonts locally (avoids “font not visible” issues in PDF rendering) */
+    @font-face {
+      font-family: "Montserrat";
+      src: url("Montserrat.ttf") format("truetype");
+      font-weight: 100 900;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Playfair Display";
+      src: url("PlayfairDisplay.ttf") format("truetype");
+      font-weight: 400 900;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root{
+      --maroon:#601A29;
+      --gold:#C2AD70;
+      --offwhite:#F9F8F6;
+      --text:#363330;
+      --muted:#6B6661;
+      --card:#FFFFFF;
+    }
+
+    *{box-sizing:border-box;}
+    html,body{height:100%;}
+    body{
+      margin:0;
+      background:var(--offwhite);
+      color:var(--text);
+      font-family:"Montserrat", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+      -webkit-print-color-adjust: exact;
+      print-color-adjust: exact;
+    }
+
+    /* PDF page sizing */
+    @page{ size: A4; margin: 0; }
+
+    .page{
+      /*
+        Chrome/print-to-PDF sometimes introduces unprintable side margins.
+        We simulate a full-bleed design by rendering with a small bleed that gets clipped by the page.
+      */
+      width:230mm;
+      height:297mm;
+      margin-left:-10mm;
+      page-break-after: always;
+      position:relative;
+      overflow:hidden;
+      background: var(--offwhite);
+    }
+
+    .container{ padding:16mm 26mm; }
+
+    .topbar{
+      position:absolute; left:0; top:0; right:0;
+      height:20mm;
+      background:var(--maroon);
+      border-bottom:1px solid var(--gold);
+      display:flex; align-items:center; justify-content:space-between;
+      padding:0 28mm; /* compensate for bleed */
+      gap:12px;
+    }
+    .topbar .title{ color:#fff; font-size:11px; letter-spacing:.2px; }
+    /* Use full logo, sized to feel premium but not cramped */
+    .topbar img{ height:12mm; width:auto; object-fit:contain; }
+
+    /* Cover */
+    .cover{ background:var(--maroon); color:#fff; }
+    .cover .gold-rail{ position:absolute; left:0; top:0; bottom:0; width:7mm; background:var(--gold); }
+    .cover .gold-rail-right{ position:absolute; right:0; top:0; bottom:0; width:7mm; background:var(--gold); }
+    .cover .logo-wrap{
+      position:absolute;
+      left:0; right:0;
+      top:42mm;
+      display:flex;
+      justify-content:center;
+    }
+    .cover .logo{
+      width:145mm;
+      max-width:175mm;
+      height:auto;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,.18));
+    }
+    .cover h1{
+      margin:0;
+      position:absolute;
+      left:18mm; right:18mm;
+      top:86mm;
+      text-align:center;
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size:32px;
+      letter-spacing:.2px;
+    }
+    .cover .divider{
+      position:absolute; left:20%; right:20%; top:101mm;
+      height:2px; background:var(--gold);
+    }
+    .cover .sub{
+      position:absolute; left:18mm; right:18mm; top:112mm;
+      text-align:center;
+      font-size:12px;
+      color:rgba(249,248,246,.95);
+    }
+    .cover .pitch{
+      position:absolute; left:24mm; right:24mm; top:134mm;
+      font-size:11px; line-height:1.6;
+      color:rgba(249,248,246,.95);
+      text-align:left;
+    }
+    .stats{
+      position:absolute; left:22mm; right:22mm; bottom:30mm;
+      background:rgba(255,255,255,.08);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:10px;
+      padding:14px 18px;
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap:14px;
+      text-align:center;
+    }
+    .stat .num{ color:var(--gold); font-weight:800; font-size:16px; }
+    .stat .lab{ color:rgba(249,248,246,.95); font-size:10px; margin-top:4px; }
+    .footerbar{
+      position:absolute; left:0; right:0; bottom:0;
+      height:16mm; background:var(--gold);
+      display:flex; align-items:center;
+      padding:0 28mm; /* compensate for bleed */
+      color:var(--maroon);
+      font-weight:700;
+      font-size:10px;
+    }
+
+    /* Sections */
+    h2{
+      margin:0 0 10px 0;
+      font-family:"Playfair Display", serif;
+      font-weight:700;
+      font-size:22px;
+      letter-spacing:.2px;
+    }
+    p{ margin:0 0 10px 0; color:var(--muted); font-size:11px; line-height:1.55; }
+
+    .grid{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap:10mm;
+      margin-top:10mm;
+    }
+    .card{
+      background:var(--card);
+      border-radius:14px;
+      overflow:hidden;
+      box-shadow: 0 6px 22px rgba(0,0,0,.06);
+      border:1px solid rgba(0,0,0,.06);
+    }
+    .card .accent{ height:6px; background:var(--gold); }
+    .card .body{ padding:14px 14px 16px 14px; }
+    .card h3{ margin:0 0 6px 0; font-size:12px; color:var(--text); font-weight:800; }
+    .card p{ margin:0; font-size:10.5px; }
+
+    .bullets{ margin-top:10mm; }
+    .bullets ul{ margin:8px 0 0 0; padding:0; list-style:none; }
+    .bullets li{
+      display:flex; gap:10px;
+      align-items:flex-start;
+      margin:0 0 8px 0;
+      color:var(--muted);
+      font-size:10.8px;
+      line-height:1.45;
+    }
+    .dot{ width:7px; height:7px; background:var(--gold); border-radius:999px; margin-top:5px; flex:0 0 auto; }
+
+    .bottomline{
+      position:absolute; left:18mm; right:18mm; bottom:12mm;
+      border-top:1px solid rgba(194,173,112,.45);
+      padding-top:6px;
+      font-size:9.5px;
+      color:var(--muted);
+    }
+
+    /* Works */
+    .works{ margin-top:10mm; display:grid; grid-template-columns: repeat(3, 1fr); gap:8mm; }
+    .work{
+      background:#fff;
+      border-radius:14px;
+      overflow:hidden;
+      border:1px solid rgba(0,0,0,.06);
+      box-shadow: 0 6px 22px rgba(0,0,0,.06);
+    }
+    .work .img{
+      height:55mm;
+      width:100%;
+      object-fit:cover;
+      display:block;
+    }
+    .pill{
+      position:absolute;
+      margin:10px;
+      padding:6px 10px;
+      font-size:9px;
+      font-weight:800;
+      background:rgba(0,0,0,.45);
+      color:#fff;
+      border-radius:999px;
+      letter-spacing:.4px;
+    }
+    .work .meta{ padding:10px 12px 12px 12px; }
+    .work .name{ font-weight:900; font-size:11px; color:var(--text); }
+    .work .loc{ font-size:10px; color:var(--muted); margin-top:4px; }
+
+    .cta{
+      position:absolute; left:18mm; right:18mm; bottom:20mm;
+      background:var(--maroon);
+      color:#fff;
+      border-radius:14px;
+      padding:14px;
+      text-align:center;
+      font-weight:800;
+      font-size:11px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: COVER -->
+  <section class="page cover">
+    <div class="gold-rail"></div>
+    <div class="gold-rail-right"></div>
+
+    <div class="logo-wrap">
+      <img class="logo" src="logo-white.png" alt="Da Creation Events and Decor" />
+    </div>
+
+    <h1>Company Introduction</h1>
+    <div class="divider"></div>
+    <div class="sub">Weddings • Corporate Events • Celebrations • Decor</div>
+
+    <div class="pitch">
+      <div><strong>Da Creation Events and Decor</strong> is a premium event management company based in Pune, delivering culturally rich weddings and high-impact corporate experiences across India.</div>
+      <div style="height:10px"></div>
+      <div>We combine strategy, design, production, hospitality, and flawless on-ground execution—so your event feels effortless for you and unforgettable for your guests.</div>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><div class="num">100+</div><div class="lab">Events Executed</div></div>
+      <div class="stat"><div class="num">20+</div><div class="lab">Cities Covered</div></div>
+      <div class="stat"><div class="num">2020</div><div class="lab">Founded</div></div>
+    </div>
+
+    <div class="footerbar">dacreation.in  |  info@dacreation.in  |  +91 79724 96366</div>
+  </section>
+
+  <!-- PAGE 2: OVERVIEW -->
+  <section class="page">
+    <div class="topbar">
+      <img src="logo-white.png" alt="Da Creation" />
+      <div class="title">Overview</div>
+    </div>
+
+    <div class="container" style="padding-top:32mm;">
+      <h2>More Than Just Planners</h2>
+      <p>
+        We blend modern design sensibilities with deep cultural understanding—bringing precision planning and premium execution to every event.
+        From intimate celebrations to enterprise-scale corporate productions, we manage everything end-to-end.
+      </p>
+
+      <div class="grid">
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Weddings & Celebrations</h3>
+            <p>Tradition-led weddings with modern elegance, destination planning, and guest experience.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Corporate Events</h3>
+            <p>Conferences, product launches, brand activations, executive retreats, and gala nights.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Design & Decor</h3>
+            <p>Concept, staging, florals, lighting, set design, and styling aligned to your theme.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Production & Logistics</h3>
+            <p>Vendor management, timelines, technical production, hospitality, and run-of-show.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bullets">
+        <h2 style="font-size:18px; margin-top:10mm;">Why Clients Choose Us</h2>
+        <ul>
+          <li><span class="dot"></span><span>Clear timelines, transparent communication, and dedicated on-ground teams</span></li>
+          <li><span class="dot"></span><span>Modern aesthetic with cultural sensitivity for Indian rituals and brand guidelines</span></li>
+          <li><span class="dot"></span><span>Corporate-grade documentation, vendor management, and stakeholder alignment</span></li>
+          <li><span class="dot"></span><span>Execution-first approach focused on guest experience and business outcomes</span></li>
+        </ul>
+      </div>
+
+      <div style="display:grid; grid-template-columns: 1.15fr .85fr; gap:10mm; margin-top:10mm;">
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Our Process</h3>
+            <p>Discovery & Brief → Concept & Design → Vendor Curation → Production Plan & Timelines → On-ground Execution → Wrap.</p>
+          </div>
+        </div>
+        <div class="card">
+          <div class="accent"></div>
+          <div class="body">
+            <h3>Deliverables</h3>
+            <p>Event strategy • moodboards • décor plan • vendor management • run-of-show • hospitality • on-site production.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bottomline">Website: dacreation.in   |   Email: info@dacreation.in   |   Phone: +91 79724 96366 / +91 78878 28280</div>
+    </div>
+  </section>
+
+  <!-- PAGE 3: WORK -->
+  <section class="page">
+    <div class="topbar">
+      <img src="logo-white.png" alt="Da Creation" />
+      <div class="title">Selected Works</div>
+    </div>
+
+    <div class="container" style="padding-top:32mm;">
+      <h2>Featured Moments</h2>
+      <p>A glimpse into events crafted with intention, precision, and emotion.</p>
+
+      <div class="works">
+        <div class="work">
+          <div style="position:relative;">
+            <div class="pill">WEDDING</div>
+            <img class="img" src="work_mirchandani.png" alt="Mirchandani Family Wedding" />
+          </div>
+          <div class="meta">
+            <div class="name">Mirchandani Family Wedding</div>
+            <div class="loc">Lonavala, Maharashtra</div>
+          </div>
+        </div>
+
+        <div class="work">
+          <div style="position:relative;">
+            <div class="pill">DESTINATION</div>
+            <img class="img" src="work_beach.jpg" alt="Beach Destination Wedding" />
+          </div>
+          <div class="meta">
+            <div class="name">Beach Destination Wedding</div>
+            <div class="loc">Goa</div>
+          </div>
+        </div>
+
+        <div class="work">
+          <div style="position:relative;">
+            <div class="pill">CORPORATE</div>
+            <img class="img" src="work_png_ls1.png" alt="Litestyle By PNG" />
+          </div>
+          <div class="meta">
+            <div class="name">Litestyle By PNG</div>
+            <div class="loc">Pune</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta">Book a Free Consultation  •  dacreation.in/inquire</div>
+      <div class="bottomline">Brand colors: #601A29 (Maroon), #C2AD70 (Gold)   •   Fonts: Playfair Display + Montserrat</div>
+    </div>
+  </section>
+
+</body>
+</html>

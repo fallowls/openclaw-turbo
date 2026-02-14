@@ -1,0 +1,61 @@
+#scripter-overlay {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 2147483647;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+.scripter-card {
+  width: 320px;
+  background: rgba(17, 24, 39, 0.92);
+  color: #fff;
+  border-radius: 14px;
+  box-shadow: 0 12px 36px rgba(0,0,0,0.35);
+  border: 1px solid rgba(255,255,255,0.08);
+  backdrop-filter: blur(8px);
+  padding: 12px 14px;
+}
+.scripter-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+.scripter-title {
+  font-size: 12px;
+  opacity: 0.85;
+}
+.scripter-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 999px;
+  background: #22c55e;
+  box-shadow: 0 0 10px rgba(34,197,94,0.8);
+}
+.scripter-text {
+  font-size: 14px;
+  line-height: 1.45;
+  margin-bottom: 10px;
+}
+.scripter-actions {
+  display: flex;
+  gap: 8px;
+}
+.scripter-actions button {
+  background: #1f2937;
+  border: 1px solid rgba(255,255,255,0.08);
+  color: #fff;
+  padding: 6px 10px;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.08s ease, background 0.2s ease;
+}
+.scripter-actions button:hover {
+  background: #374151;
+}
+.scripter-actions button:active {
+  transform: translateY(1px);
+}
+.scripter-card.pinned {
+  outline: 2px solid #22c55e;
+}

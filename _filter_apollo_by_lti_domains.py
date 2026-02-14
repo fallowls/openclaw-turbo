@@ -1,0 +1,80 @@
+import pandas as pd
+import re
+from urllib.parse import urlparse
+
+lti_path = r"C:\Users\Administrator\Downloads\LTI\LTI Tal.csv"
+apollo_path = r"C:\Users\Administrator\.openclaw\workspace\bunny_apollo\combined_apollo_filtered.csv"
+out_path = r"C:\Users\Administrator\Downloads\LTI\apollo_filtered_LTI_Tal.csv"
+
+lti = pd.read_csv(lti_path, dtype=str)
+apollo = pd.read_csv(apollo_path, dtype=str)
+
+# find website/domain columns in LTI
+lti_cols = list(lti.columns)
+website_col = None
+for c in lti_cols:
+    if c.lower() in ["website", "company website", "domain"]:
+        website_col = c
+        break
+if website_col is None:
+    for c in lti_cols:
+        if 'website' in c.lower():
+            website_col = c
+            break
+if website_col is None:
+    raise SystemExit("No website/domain column found in LTI Tal")
+
+
+def get_domain(x):
+    if pd.isna(x) or not str(x).strip():
+        return None
+    x = str(x).strip()
+    if not re.match(r"https?://", x):
+        x = "http://" + x
+    try:
+        netloc = urlparse(x).netloc
+    except Exception:
+        return None
+    netloc = netloc.lower()
+    netloc = netloc.split('@')[-1]
+    if netloc.startswith('www.'):
+        netloc = netloc[4:]
+    return netloc if netloc else None
+
+lti_domains = set(filter(None, (get_domain(v) for v in lti[website_col].tolist())))
+
+# find domain/website or email column in Apollo
+apollo_cols = list(apollo.columns)
+apollo_website_col = None
+for c in apollo_cols:
+    if c.lower() in ["website", "company website", "domain", "company domain", "company website url"]:
+        apollo_website_col = c
+        break
+
+email_col = None
+for c in apollo_cols:
+    if c.lower() in ["email", "email address", "work email", "personal email"]:
+        email_col = c
+        break
+
+if apollo_website_col:
+    apollo_domains = apollo[apollo_website_col].map(get_domain)
+else:
+    def email_domain(x):
+        if pd.isna(x) or not str(x).strip():
+            return None
+        x = str(x).strip()
+        if '@' in x:
+            return x.split('@')[-1].lower()
+        return None
+    if email_col is None:
+        raise SystemExit("No website/domain or email column found in Apollo file")
+    apollo_domains = apollo[email_col].map(email_domain)
+
+apollo['__domain'] = apollo_domains
+filtered = apollo[apollo['__domain'].isin(lti_domains)].copy()
+filtered.to_csv(out_path, index=False)
+
+print("LTI domains", len(lti_domains))
+print("Filtered rows", len(filtered))
+print(out_path)

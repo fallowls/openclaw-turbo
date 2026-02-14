@@ -1,0 +1,39 @@
+{
+  "manifest_version": 3,
+  "name": "Scripter Live Assist",
+  "version": "0.1.0",
+  "description": "Live AI call assistant (MVP scaffold)",
+  "action": {
+    "default_popup": "popup.html",
+    "default_title": "Scripter Live Assist"
+  },
+  "permissions": [
+    "storage",
+    "tabs",
+    "activeTab",
+    "tabCapture",
+    "scripting",
+    "offscreen"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "background.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "matches": ["<all_urls>"],
+      "js": ["content.js"],
+      "css": ["content.css"]
+    }
+  ],
+  "offscreen_documents": [
+    {
+      "url": "offscreen.html",
+      "reasons": ["AUDIO_PLAYBACK", "BLOBS"],
+      "justification": "Capture and process tab audio for live transcription"
+    }
+  ]
+}

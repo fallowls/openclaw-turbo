@@ -1,0 +1,169 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Bio Data - Amit Yadav</title>
+  <style>
+    @page { size: A4; margin: 0; }
+    body { margin:0; font-family: "Georgia", "Times New Roman", serif; color:#222; }
+
+    .sheet { padding: 26mm 18mm 18mm; }
+
+    .topbar {
+      height: 18mm;
+      background: linear-gradient(90deg, #c7901f 0%, #e6c06a 40%, #c7901f 100%);
+      position: relative;
+    }
+    .topbar .title {
+      position:absolute;
+      left:0; right:0;
+      top: 5mm;
+      text-align:center;
+      font-weight: 600;
+      color: #fff;
+      letter-spacing: .4px;
+    }
+
+    .ornaments {
+      height: 14mm;
+      background:
+        radial-gradient(circle at 12px 10px, rgba(199,144,31,.55) 0 2px, transparent 3px),
+        radial-gradient(circle at 26px 10px, rgba(199,144,31,.55) 0 2px, transparent 3px);
+      border-bottom: 1px solid #e0d2aa;
+    }
+
+    h1 {
+      text-align:center;
+      margin: 10mm 0 6mm;
+      font-size: 22pt;
+      letter-spacing: 1px;
+      font-weight: 500;
+    }
+
+    .section {
+      margin-top: 10mm;
+    }
+
+    .section-title {
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      color: #c7901f;
+      letter-spacing: .3px;
+      margin: 0 0 4mm;
+      text-transform: uppercase;
+      font-size: 10.5pt;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: 1.4fr 0.2fr 2.2fr 1.2fr;
+      column-gap: 6mm;
+      row-gap: 2.4mm;
+      align-items: start;
+      font-size: 11.5pt;
+    }
+
+    .label { font-family: Arial, sans-serif; font-size: 10.8pt; color:#333; }
+    .colon { text-align:center; color:#777; }
+    .value { font-family: "Georgia", serif; }
+
+    .photo {
+      grid-column: 4;
+      grid-row: 1 / span 7;
+      justify-self: end;
+      width: 40mm;
+      height: 48mm;
+      border: 2px solid #e0d2aa;
+      border-radius: 4px;
+      background: #f7f7f7;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      color:#aaa;
+      font-family: Arial, sans-serif;
+      font-size: 10pt;
+    }
+
+    .family-grid {
+      display:grid;
+      grid-template-columns: 1.4fr 0.2fr 2.8fr;
+      column-gap: 6mm;
+      row-gap: 2.4mm;
+      font-size: 11.5pt;
+      align-items: start;
+    }
+
+    .contact-grid {
+      display:grid;
+      grid-template-columns: 1.4fr 0.2fr 2.8fr;
+      column-gap: 6mm;
+      row-gap: 2.4mm;
+      font-size: 11.5pt;
+      align-items: start;
+    }
+
+  </style>
+</head>
+<body>
+  <div class="topbar"><div class="title">|| Shri Ganesh ||</div></div>
+  <div class="ornaments"></div>
+
+  <div class="sheet">
+    <div style="text-align:center; font-size:22pt; margin-top:2mm;">ॐ</div>
+    <h1>BIO DATA</h1>
+
+    <div class="section">
+      <div class="section-title">Personal Details</div>
+      <div class="grid">
+        <div class="label">Name</div><div class="colon">:</div><div class="value">Amit Yadav</div>
+        <div class="photo">PHOTO</div>
+
+        <div class="label">Date of Birth</div><div class="colon">:</div><div class="value">3 September 2000</div>
+        <div></div>
+
+        <div class="label">Time of Birth</div><div class="colon">:</div><div class="value">10:00 AM</div>
+        <div></div>
+
+        <div class="label">Place of Birth</div><div class="colon">:</div><div class="value">Pimpri, Pune</div>
+        <div></div>
+
+        <div class="label">Rashi</div><div class="colon">:</div><div class="value">Tula (Libra)</div>
+        <div></div>
+
+        <div class="label">Nakshatra</div><div class="colon">:</div><div class="value">Swati</div>
+        <div></div>
+
+        <div class="label">Education</div><div class="colon">:</div><div class="value">BCA</div>
+        <div></div>
+
+        <div class="label">Occupation</div><div class="colon">:</div><div class="value">Working in private sector</div>
+        <div></div>
+
+        <div class="label">Hobbies</div><div class="colon">:</div><div class="value">Gaming, Traveling, Trekking, Riding</div>
+        <div></div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Family Details</div>
+      <div class="family-grid">
+        <div class="label">Father Name</div><div class="colon">:</div><div class="value">Chandrabhan Yadav</div>
+        <div class="label">Father's Job</div><div class="colon">:</div><div class="value">Turner</div>
+        <div class="label">Mother Name</div><div class="colon">:</div><div class="value">Urmila Yadav</div>
+        <div class="label">Mother's Job</div><div class="colon">:</div><div class="value">Housewife</div>
+        <div class="label">Brother Name</div><div class="colon">:</div><div class="value">Sunil Yadav</div>
+        <div class="label">Brother's Job</div><div class="colon">:</div><div class="value">Student (Pursuing BBA)</div>
+      </div>
+    </div>
+
+    <div class="section">
+      <div class="section-title">Contact Details</div>
+      <div class="contact-grid">
+        <div class="label">Contact No</div><div class="colon">:</div><div class="value">9881212483</div>
+        <div class="label">Address</div><div class="colon">:</div><div class="value">Pune, Maharashtra</div>
+      </div>
+    </div>
+
+  </div>
+</body>
+</html>

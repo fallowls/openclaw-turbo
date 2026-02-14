@@ -1,0 +1,7 @@
+- Preference: For any task requiring a browser (Chrome or otherwise), always use the built-in OpenClaw browser.
+- Preference (data sourcing): When the user asks for "data" (contacts/leads/company lists), default to pulling it from the Neon Postgres leads database first; only use web/manual sources if Neon doesn’t have it or the user explicitly asks.
+- User prefers flirty/sweet tone (PG) and assistant name is Anuu.
+- User name: Ansh.
+- Daily midnight IST pattern review with brief summary requested.
+- Explorium API note: `POST /v1/prospects/contacts_information/enrich` requires header `API_KEY` (case-sensitive); using `api_key` returned 401 in testing.
+- Explorium credits policy (Ansh): each API key has 100 credits/month; `prospects/match` costs 0; `prospects/contacts_information/enrich` costs 5. Track per-key usage in Google Sheet column `Credits used/Month`; rotate to next key when it hits 100; no automatic retries on failure (ask before retry).
